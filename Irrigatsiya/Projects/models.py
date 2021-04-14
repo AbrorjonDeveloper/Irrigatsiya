@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-
 class Projects(models.Model):
     name = models.CharField(max_length=600)
     file = models.FileField(blank=True,upload_to="projects")
@@ -26,3 +27,8 @@ class Projects(models.Model):
 
     def get_absolute_url(self):
         return reverse('projects')
+
+@receiver(pre_save, sender=Projects)
+def save_presentation(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.name)
+    

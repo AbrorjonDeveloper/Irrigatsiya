@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -26,3 +28,8 @@ class Videos(models.Model):
     
     def get_absolute_url(self):
         return reverse('videos')
+
+@receiver(pre_save, sender=Videos)
+def save_presentation(sender, instance, *args, **kwargs):
+    instance.slug = slugify(instance.name)
+    

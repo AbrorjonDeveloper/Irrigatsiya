@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Projects.apps.ProjectsConfig',
     'Events.apps.EventsConfig',
     'Videos.apps.VideosConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
