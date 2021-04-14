@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ object.first_name }} {{ object.last_name }}
+<table>
+    <tr>
+        <td colspan="2"><img src="{{ object.profile.avatar.url }}" alt="{{ object.username }}'s Image"></td>
+      </tr>
+  <tr>
+    <th>Fakultet:</th>
+    <td>{{ object.profile.faculty}}</td>
+  </tr>
+  <tr>
+    <th>Kafedra:</th>
+    <td>{{ object.profile.cafedra}}</td>
+  </tr>
+  <tr>
+    <th>Ilmiy daraja va unvon:</th>
+    <td>{{ object.profile.level}}</td>
+  </tr>
+  <tr>
+    <th>E-pochta:</th>
+    <td>{{ object.email}}</td>
+  </tr>
+</table>
+    
+{% endblock %}

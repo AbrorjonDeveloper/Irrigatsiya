@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-section">
+    <a style="text-align: right;" href="{% url 'articles_create' %}" class="btn btn-outline-info">New Article</a>
+</div>
+<table>
+    <tr>
+        <th>#</th>
+        <th>To'liq Nomi:</th>
+        <th>Havola</th>
+        <th>Amal</th>
+    </tr>    
+    <h3 id="demo"></h3>
+    {% for article in objects %}
+        <tr>
+            <td>number</td>
+            {% if article.article %}
+            <td><a href='{{ article.article.url }}' download>{{ article.name}}</a></td>
+            {% elif article.link %}
+            <td><a href="{{ article.link }}">Havola</a></td>
+            {% endif %}
+            <td><a href="{% url 'articles_update' article.slug %}">Update</a></td>
+            <td><a href="{% url 'articles_delete' article.slug %}">Delete</a></td>
+            <td>{{ article.slug }}</td>
+        </tr>
+    {% endfor %}
+</table>
+    <script>
+        var obj = objects;
+        class_type = obj[0].class_name; 
+
+        document.getElementById("demo").innerHTML=class_type;
+        
+    </script>
+{% endblock %}

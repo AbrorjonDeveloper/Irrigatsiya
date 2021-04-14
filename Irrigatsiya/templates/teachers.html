@@ -1,0 +1,31 @@
+{% extends 'profile_base.html' %}
+
+{% block content %}
+    {% for teacher in teachers %}
+    <table>
+        <tr>
+            <td><a href="{% url 'teacher_detail' teacher.id %}"><img src="{{ teacher.profile.avatar.url }}" alt="{{ teacher.username }}'s Image"></a></td>
+          </tr>
+      <tr>
+        <th>Fakultet:</th>
+        <td>{{ teacher.profile.faculty}}</td>
+      </tr>
+      <tr>
+        <th>Kafedra:</th>
+        <td>{{ teacher.profile.cafedra}}</td>
+      </tr>
+      <tr>
+        <th>Ilmiy daraja va unvon:</th>
+        <td>{{ teacher.profile.level}}</td>
+      </tr>
+      <tr>
+        <th>E-pochta:</th>
+        <td>{{ teacher.email}}</td>
+      </tr>
+    </table>
+    <hr>
+    <h1 style="padding:15px;">Qo'shimcha ma'lumotlar</h1>
+    <hr>
+    <a href="mailto:{{ teacher.email }}">{{ teacher.email }}</a>
+    {% endfor %}
+{% endblock %}
