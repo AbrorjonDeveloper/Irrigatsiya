@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -59,5 +61,8 @@ class Book(models.Model):
     #         self.slug = slugify(self.name)
     #         return super(Book, self).save(*args, **kwargs)
 
-
+@receiver(pre_delete, sender=Book)
+def object_file_delete(sender, instance, **kwargs):
+    if instance.file:
+        instance.file.delete()
 

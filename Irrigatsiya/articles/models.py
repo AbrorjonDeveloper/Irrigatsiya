@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 class Articles(models.Model):
     name = models.CharField(max_length=500)
-    article = models.FileField(blank=True, upload_to="articles")
+    file = models.FileField(blank=True, upload_to="articles")
     slug = models.SlugField(blank=False, null=False, unique=True, max_length=500)
     link = models.URLField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -14,6 +14,11 @@ class Articles(models.Model):
 
     class Meta:
         verbose_name_plural = 'Articles'
+        
+        def __init__(self):
+            model = Articles
+            fields = ('name', 'article', 'link',)
+            return super().__init__(**kwargs)
     
     def save(self, *args, **kwargs):
         if  not self.slug :

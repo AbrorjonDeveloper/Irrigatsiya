@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
+{% load class_name %}
 {% block content %}
 <div class="content-section">
-    <a style="text-align: right;" href="{% url 'articles_create' %}" class="btn btn-outline-info">New Article</a>
+    <ul name="My works" id="myworks">
+        <ls value="article"><a style="text-align: right;" href="{% url 'articles_create' %}" class="btn btn-outline-info">New Article</a></ls>
+        <ls value="book"><a style="text-align: right;" href="{% url 'books_create' %}" class="btn btn-outline-info">New Book</a></ls>
+        <ls value="presentation"><a style="text-align: right;" href="{% url 'presentations_create' %}" class="btn btn-outline-info">New Presentation</a></ls>
+        <ls value="project"><a style="text-align: right;" href="{% url 'projects_create' %}" class="btn btn-outline-info">New Project</a></ls>
+        <ls value="event"><a style="text-align: right;" href="{% url 'events_create' %}" class="btn btn-outline-info">New Event</a></ls>
+        <ls value="video"><a style="text-align: right;" href="{% url 'videos_create' %}" class="btn btn-outline-info">New Video</a></ls>
+    </ul>
 </div>
 <table>
     <tr>
@@ -12,24 +20,33 @@
     </tr>    
     <h3 id="demo"></h3>
     {% for article in objects %}
+        {% with article|class_name as klass %}
         <tr>
             <td>number</td>
-            {% if article.article %}
-            <td><a href='{{ article.article.url }}' download>{{ article.name}}</a></td>
+            {% if article.file %}
+            <td><a href='{{ article.file.url }}' download>{{ article.name}}</a></td>
             {% elif article.link %}
             <td><a href="{{ article.link }}">Havola</a></td>
             {% endif %}
-            <td><a href="{% url 'articles_update' article.slug %}">Update</a></td>
-            <td><a href="{% url 'articles_delete' article.slug %}">Delete</a></td>
+            {% if klass == 'Articles' %}
+                <td><a href="{% url 'articles_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'articles_delete' article.slug %}">Delete</a></td>
+            {% elif klass == 'Book' %}
+                <td><a href="{% url 'books_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'books_delete' article.slug %}">Delete</a></td>
+            {% elif klass == 'Presentations' %}
+                <td><a href="{% url 'presentations_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'presentations_delete' article.slug %}">Delete</a></td>
+            {% elif klass == 'Projects' %}
+                <td><a href="{% url 'projects_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'projects_delete' article.slug %}">Delete</a></td>
+            {% elif klass == 'Videos' %}
+                <td><a href="{% url 'videos_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'videos_delete' article.slug %}">Delete</a></td>
+            {% endif %}
             <td>{{ article.slug }}</td>
         </tr>
+        {% endwith %}
     {% endfor %}
 </table>
-    <script>
-        var obj = objects;
-        class_type = obj[0].class_name; 
-
-        document.getElementById("demo").innerHTML=class_type;
-        
-    </script>
 {% endblock %}

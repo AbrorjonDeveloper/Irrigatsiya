@@ -43,7 +43,7 @@ class BooksUpdateView( LoginRequiredMixin , UserPassesTestMixin, UpdateView):
 
 class BooksDeleteView( LoginRequiredMixin , UserPassesTestMixin, DeleteView):
     model = Book
-    template_name = 'article_delete.html'
+    template_name = 'article_delete_confirm.html'
     # fields = []
 
     def test_func(self):

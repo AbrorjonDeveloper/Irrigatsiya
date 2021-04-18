@@ -62,6 +62,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
+            'libraries': {
+                'class_name': 'templatetags.class_name',
+        }
         },
     },
 ]
@@ -117,6 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CSRF_COOKIE_SECURE = True
 
 
 MEDIA_URL = '/media/'
