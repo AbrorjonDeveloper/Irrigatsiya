@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<table>
+    <tr height="40" style="border:2px solid black">
+        <th width="400">*Todo name</th>
+        <th width="170">*Status</th>
+        <th width="170">*Published at </th>
+        <th width="170">*Deadline</th>
+    </tr>
+    
+    {% for todo in todos %}
+        <tr height="25" style="border:2px solid black">
+            <td width="400">{{ todo.todo }}</td>
+            <td width="170" padding="3" class="alert alert-warning">{{ todo.status }}</td>
+            <td width="170">{{ todo.publish_date }}</td>
+            <td width="170" padding="3" class="alert alert-warning">{{ todo.deadline }}</td>
+            <td width="20"><a href="#"><i class="fa fa-minus"></i></a></td>
+            <td width="20"><a href="#"><i class="fa fa-pencil"></i></a></td>
+
+        </tr>
+    {%  endfor %}
+</table>
+{% endblock %}
