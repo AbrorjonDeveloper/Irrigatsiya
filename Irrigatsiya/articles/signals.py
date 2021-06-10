@@ -7,7 +7,7 @@ from django.utils.text import slugify
 def object_slug_updated(sender, instance, *args, **kwargs):
     instance.slug = slugify(instance.name)
 
-@receiver(pre_delete, sender=Articles)
-def object_file_delete(sender, instance, **kwargs):
-    if instance.article:
-        instance.article.delete()
+# @receiver(pre_delete, sender=Articles)
+# def object_file_delete(sender, instance, **kwargs):
+#     if instance.file:
+#         instance.file.delete()

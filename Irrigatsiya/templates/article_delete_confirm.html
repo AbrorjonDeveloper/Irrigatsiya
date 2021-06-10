@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load class_name %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -11,7 +12,25 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
-                <a class="btn btn-outline-secondary" href="{% url 'articles'  %}">Cancel</a>
+                {% with article|class_name as klass %}
+        <tr>
+            <td>number</td>
+            {% if article.article %}
+            <td><a href='{{ article.article.url }}' download>{{ article.name}}</a></td>
+            {% elif article.link %}
+            <td><a href="{{ article.link }}">Havola</a></td>
+            {% endif %}
+            {% if klass == 'Articles' %}
+            <a class="btn btn-outline-secondary" href="{% url 'articles'  %}">Cancel</a>
+            {% elif klass == 'Book' %}
+            <a class="btn btn-outline-secondary" href="{% url 'books'  %}">Cancel</a>
+            {% elif klass == 'Presentations' %}
+            <a class="btn btn-outline-secondary" href="{% url 'presentations'  %}">Cancel</a>
+            {% elif klass == 'Projects' %}
+            <a class="btn btn-outline-secondary" href="{% url 'projects'  %}">Cancel</a>
+            {% elif klass == 'Videos' %}
+            <a class="btn btn-outline-secondary" href="{% url 'videos'  %}">Cancel</a>
+            {% endif %}
             </div>
         </form>
     </div>

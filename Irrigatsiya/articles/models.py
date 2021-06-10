@@ -12,16 +12,17 @@ class Articles(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     up_date = models.DateTimeField(auto_now=True)
 
+
     class Meta:
         verbose_name_plural = 'Articles'
         
         def __init__(self):
             model = Articles
-            fields = ('name', 'article', 'link',)
+            fields = ('name', 'file', 'link',)
             return super().__init__(**kwargs)
     
     def save(self, *args, **kwargs):
-        if  not self.slug :
+        if not self.slug :
             self.slug = slugify(self.name)
         return super(Articles, self).save(*args, **kwargs)
 

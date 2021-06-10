@@ -4,6 +4,16 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 
+from rest_framework import generics
+from .serializers import BookSerializer
+class BookListAPIView(generics.ListCreateAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
+class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
+
 class BooksList(ListView):
     model = Book
     template_name = 'articles.html'

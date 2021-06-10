@@ -8,4 +8,4 @@ class ArticlesForm(forms.ModelForm):
 
     class Meta:
         model = Articles
-        fields = ['name', 'article', 'link']
+        fields = ['name', 'file', 'link']

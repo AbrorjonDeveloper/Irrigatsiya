@@ -28,6 +28,7 @@
             {% elif article.link %}
             <td><a href="{{ article.link }}">Havola</a></td>
             {% endif %}
+            {% if user.is_authenticated %}
             {% if klass == 'Articles' %}
                 <td><a href="{% url 'articles_update' article.slug %}">Update</a></td>
                 <td><a href="{% url 'articles_delete' article.slug %}">Delete</a></td>
@@ -43,6 +44,12 @@
             {% elif klass == 'Videos' %}
                 <td><a href="{% url 'videos_update' article.slug %}">Update</a></td>
                 <td><a href="{% url 'videos_delete' article.slug %}">Delete</a></td>
+            {% elif klass == 'Events' %}
+                <td><a href="{% url 'events_update' article.slug %}">Update</a></td>
+                <td><a href="{% url 'events_delete' article.slug %}">Delete</a></td>
+            {% endif %}
+            {% else %}
+            
             {% endif %}
             <td>{{ article.slug }}</td>
         </tr>
